@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة إدارة وتقييم الأداء البرلماني | المكتب الإعلامي المركزي</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        /* ==========================================================================
+           1. نظام الألوان والمتغيرات العامة (CSS Variables - Premium Theme)
+           ========================================================================== */
+        :root {
+            --bg-body: #FFFFFF;
+            --bg-sidebar: #0F0F0F;
+            --bg-cards: #FFFFFF;
+            --color-black: #111111;
+            --color-white: #FFFFFF;
+            --color-gold: #D4AF37;
+            --color-gold-hover: #AA8B2C;
+            --color-red: #C41E3A;
+            --color-red-light: #FFEBEE;
+            --color-gray-light: #F8F9FA;
+            --color-gray-border: #E5E7EB;
+            --color-text-muted: #6B7280;
+            --font-main: 'Tajawal', sans-serif;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-premium: 0 20px 40px rgba(0,0,0,0.06);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-all: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================================================
+           2. التنسيقات والتحضيرات الأساسية (Reset & Base Styles)
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--color-black);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul, ol { list-style: none; }
+        button, input, select, textarea { font-family: inherit; }
+        
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-gray-light); }
+        ::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-black); }
+
+        /* ==========================================================================
+           3. واجهة تسجيل الدخول (Authentication Interface)
+           ========================================================================== */
+        #auth-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-body);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: var(--transition-all);
+        }
+
+        .auth-card {
+            background: var(--color-white);
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-premium);
+            border: 1px solid var(--color-gray-border);
+            border-top: 6px solid var(--color-gold);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: var(--color-red-light);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .auth-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .auth-header .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--bg-sidebar);
+            color: var(--color-gold);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--color-gold);
+        }
+
+        .auth-header h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--color-black);
+            margin-bottom: 5px;
+        }
+
+        .auth-header p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+
+        .auth-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: right;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--color-black);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            right: 15px;
+            color: var(--color-gold);
+            font-size: 18px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 45px 14px 15px;
+            border: 1.5px solid var(--color-gray-border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            color: var(--color-black);
+            background: var(--color-gray-light);
+            transition: var(--transition-all);
+        }
+
+        .input-wrapper input:focus {
+            background: var(--color-white);
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-auth {
+            background: var(--bg-sidebar);
+            color: var(--color-gold);
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 14px;
+            border: 2px solid var(--color-gold);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-all);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-auth:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .auth-error {
+            background: var(--color-red-light);
+            color: var(--color-red);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            display: none;
+            border: 1px solid var(--color-red);
+        }
+
+        /* ==========================================================================
+           4. الهيكل الأساسي للوحة التحكم (Layout - Sidebar & Content Area)
+           ========================================================================== */
+        #dashboard-container {
+            display: none;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        /* القائمة الجانبية الفاخرة */
+        .app-sidebar {
+            width: 290px;
+            background: var(--bg-sidebar);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            color: var(--color-white);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1000;
+            border-left: 2px solid var(--color-gold);
+            transition: var(--transition-all);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .sidebar-brand .logo-box {
+            width: 45px;
+            height: 45px;
+            background: var(--color-gold);
+            color: var(--color-black);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--color-white);
+        }
+
+        .sidebar-brand p {
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            font-weight: 400;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            color: #A0AEC0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            transition: var(--transition-all);
+            cursor: pointer;
+        }
+
+        .menu-link i {
+            font-size: 18px;
+            width: 20px;
+        }
+
+        .menu-link:hover, .menu-link.active {
+            color: var(--color-white);
+            background: var(--color-red);
+        }
+
+        .menu-link.active-gold {
+            background: var(--color-gold);
+            color: var(--color-black);
+            font-weight: 700;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            color: var(--color-white);
+            background: transparent;
+            border: 2px solid var(--color-red);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            width: 100%;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: var(--transition-all);
+        }
+
+        .btn-logout:hover {
+            background: var(--color-red);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* المحتوى الرئيسي للمنظومة */
+        .app-content {
+            margin-right: 290px;
+            flex: 1;
+            padding: 35px 40px;
+            background: var(--bg-body);
+            min-height: 100vh;
+            transition: var(--transition-all);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            background: var(--color-white);
+            padding: 20px 30px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-gray-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title h3 {
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: var(--color-black);
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .identity-badge {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--color-gray-light);
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-border);
+        }
+
+        .identity-badge .avatar {
+            width: 42px;
+            height: 42px;
+            background: var(--color-gold);
+            color: var(--color-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 900;
+            border: 2px solid var(--color-white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .identity-badge .user-details {
+            text-align: right;
+        }
+
+        .identity-badge .user-details h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .identity-badge .user-details span {
+            font-size: 0.75rem;
+            color: var(--color-red);
+            font-weight: 700;
+        }
+
+        /* ==========================================================================
+           5. الكروت الإحصائية ولوحة الرؤى البيانية (Metrics & Dashboards)
+           ========================================================================== */
+        .view-section {
+            display: none;
+            flex-direction: column;
+            gap: 35px;
+            animation: slideUp 0.6s cubic-bezier(0.1, 1, 0.1, 1);
+        }
+
+        .view-section.active { display: flex; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .metric-card {
+            background: var(--color-white);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            border: 1.5px solid var(--color-gray-border);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 160px;
+            transition: var(--transition-all);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .metric-card.alert-card { border-right: 5px solid var(--color-red); }
+        .metric-card.gold-card { border-right: 5px solid var(--color-gold); }
+        .metric-card.black-card { border-right: 5px solid var(--color-black); }
+
+        .card-header-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header-metric span {
+            font-size: 0.88rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .card-header-metric .icon-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--color-gray-light);
+            color: var(--color-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition-all);
+        }
+
+        .metric-card:hover .icon-circle {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .metric-card .val {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--color-black);
+            margin: 15px 0 5px;
+        }
+
+        .metric-card p {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* الرسوم البيانية والجداول المتقدمة */
+        .graphics-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .visual-card {
+            background: var(--color-white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .visual-card h3 {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--color-black);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .visual-card h3 small { font-size: 0.75rem; color: var(--color-gold); font-weight: 500; }
+
+        .chart-box-display {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+
+        /* ==========================================================================
+           6. جداول البيانات الذكية (Advanced Interactive Tables)
+           ========================================================================== */
+        .table-section {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-border);
+            box-shadow: var(--shadow-sm);
+            padding: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .table-title-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .table-title-area h3 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--color-black);
+        }
+
+        .table-filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .input-search {
+            padding: 10px 15px;
+            border: 1px solid var(--color-gray-border);
+            border-radius: var(--radius-sm);
+            background: var(--color-gray-light);
+            font-size: 0.88rem;
+            min-width: 220px;
+            transition: var(--transition-all);
+        }
+
+        .input-search:focus {
+            background: var(--color-white);
+            border-color: var(--color-gold);
+        }
+
+        .btn-action-gold {
+            background: var(--color-gold);
+            color: var(--color-black);
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 10px 22px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: var(--transition-all);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action-gold:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--color-gray-border);
+            border-radius: var(--radius-md);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        table thead {
+            background: var(--color-gray-light);
+            border-bottom: 2px solid var(--color-gray-border);
+        }
+
+        table th {
+            padding: 16px 20px;
+            font-weight: 900;
+            color: var(--color-black);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid var(--color-gray-border);
+            transition: var(--transition-all);
+        }
+
+        table tbody tr:hover {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        table td {
+            padding: 15px 20px;
+            color: var(--color-black);
+            font-weight: 500;
+        }
+
+        .td-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .td-name .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--color-gray-light);
+            color: var(--color-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid var(--color-gold);
+        }
+
+        .pill-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: var(--radius-lg);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .pill-badge.high { background: rgba(212, 175, 55, 0.15); color: var(--color-gold-hover); border: 1px solid var(--color-gold); }
+        .pill-badge.mid { background: #EEF2F6; color: var(--color-black); border: 1px solid var(--color-gray-border); }
+        .pill-badge.alert { background: var(--color-red-light); color: var(--color-red); border: 1px solid var(--color-red); }
+
+        .btn-table {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-gray-border);
+            background: white;
+            color: var(--color-black);
+            cursor: pointer;
+            transition: var(--transition-all);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-table:hover {
+            background: var(--color-red);
+            color: white;
+            border-color: var(--color-red);
+        }
+
+        /* ==========================================================================
+           7. النوافذ المنبثقة (Modals & Forms)
+           ========================================================================== */
+        .app-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app-modal.active { display: flex; }
+
+        .modal-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-border);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 600px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-gray-light);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--color-black);
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: var(--transition-all);
+        }
+
+        .btn-close-modal:hover { color: var(--color-red); }
+
+        .modal-body-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .full-width-field { grid-column: span 2; }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            border-top: 2px solid var(--color-gray-light);
+            padding-top: 20px;
+        }
+
+        /* ==========================================================================
+           8. التجاوب مع جميع الشاشات والهواتف (Full Responsive Engine)
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .graphics-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 992px) {
+            .app-sidebar { transform: translateX(100%); }
+            .app-sidebar.mobile-open { transform: translateX(0); }
+            .app-content { margin-right: 0; padding: 25px 20px; }
+            .header-actions { display: none; }
+            .header-title h3 { font-size: 1.35rem; }
+        }
+
+        @media (max-width: 600px) {
+            .modal-body-form { grid-template-columns: 1fr; }
+            .full-width-field { grid-column: span 1; }
+            .auth-card { padding: 25px; }
+            .app-header { flex-direction: column; gap: 15px; text-align: center; }
+            .metric-card .val { font-size: 1.95rem; }
+        }
+
+        /* تنسيقات مخصصة للتقرير المطبوع */
+        .pdf-print-container {
+            padding: 40px;
+            background: #FFFFFF;
+            color: #0F0F0F;
+            display: none;
+            font-family: var(--font-main);
+        }
+
+        .pdf-print-container.active-pdf { display: block; }
+    </style>
+</head>
+<body>
+
+    <div id="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h1>المكتب الإعلامي المركزي</h1>
+                <p>نظام تقييم ومتابعة أداء النواب</p>
+            </div>
+
+            <div class="auth-body">
+                <div class="auth-error" id="login-error-msg">البيانات المدخلة غير صحيحة، يرجى التحقق.</div>
+                <div class="form-group">
+                    <label>الكود التعريفي أو اسم المستخدم</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="auth-user" placeholder="أدخل اسمك أو الكود الخاص">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                        <input type="password" id="auth-pass" placeholder="•••••••••">
+                    </div>
+                </div>
+                <button class="btn-auth" onclick="sys.handleAuthentication()">
+                    <span>تسجيل الدخول للمنصة</span>
+                    <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-container">
+        
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-box"><i class="fas fa-landmark"></i></div>
+                <div>
+                    <h2>المركز الإعلامي</h2>
+                    <p>منظومة تقييم النواب 2026</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a class="menu-link active" id="nav-dash" onclick="sys.switchSection('dash')">
+                    <i class="fas fa-chart-pie"></i> لوحة الإحصائيات
+                </a>
+                <a class="menu-link" id="nav-deputies" onclick="sys.switchSection('deputies')">
+                    <i class="fas fa-user-friends"></i> جدول النواب
+                </a>
+                <a class="menu-link" id="nav-tasks" onclick="sys.switchSection('tasks')">
+                    <i class="fas fa-layer-group"></i> سجل التكليفات
+                </a>
+                <a class="menu-link" id="nav-admin" style="display:none;" onclick="sys.switchSection('admin')">
+                    <i class="fas fa-cog"></i> الإدارة المركزية
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="location.reload()">
+                    <i class="fas fa-power-off"></i> تسجيل الخروج
+                </button>
+            </div>
+        </aside>
+
+        <main class="app-content">
+            
+            <header class="app-header">
+                <div class="header-title">
+                    <h3 id="panel-welcome">أهلاً بك في منصة التقييم</h3>
+                    <p>الإحصائيات الميدانية والمهام البرلمانية</p>
+                </div>
+                <div class="header-actions">
+                    <div class="identity-badge">
+                        <div class="avatar" id="sys-avatar">M</div>
+                        <div class="user-details">
+                            <h4 id="sys-fullname">المكتب الإعلامي</h4>
+                            <span id="sys-role">مسؤول المنظومة</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="view-section active" id="sec-dash">
+                <div class="dashboard-grid">
+                    <div class="metric-card gold-card">
+                        <div class="card-header-metric">
+                            <span>التقييم العام للمكتب</span>
+                            <div class="icon-circle"><i class="fas fa-star"></i></div>
+                        </div>
+                        <div class="val" id="kpi-avg-score">0%</div>
+                        <p>بناءً على المهام والحضور الميداني</p>
+                    </div>
+                    <div class="metric-card alert-card">
+                        <div class="card-header-metric">
+                            <span>إجمالي التكليفات المنجزة</span>
+                            <div class="icon-circle"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="val" id="kpi-tasks-done">0</div>
+                        <p>من إجمالي المهام الممنوحة</p>
+                    </div>
+                    <div class="metric-card black-card">
+                        <div class="card-header-metric">
+                            <span>نسبة حضور الاجتماعات</span>
+                            <div class="icon-circle"><i class="fas fa-calendar-alt"></i></div>
+                        </div>
+                        <div class="val" id="kpi-attendance">0%</div>
+                        <p>إجمالي اللجان واللقاءات الرسمية</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="card-header-metric">
+                            <span>النائب الأفضل أداءً</span>
+                            <div class="icon-circle"><i class="fas fa-trophy"></i></div>
+                        </div>
+                        <div class="val" id="kpi-best-deputy" style="font-size:1.15rem; margin-top:20px;">النائب المتصدر</div>
+                        <p>الحاصل على أعلى نقاط تقييم</p>
+                    </div>
+                </div>
+
+                <div class="graphics-grid">
+                    <div class="visual-card">
+                        <h3>مقارنة الأداء البرلماني <small>شهرياً</small></h3>
+                        <div class="chart-box-display">
+                            <canvas id="canvas-main-perf"></canvas>
+                        </div>
+                    </div>
+                    <div class="visual-card">
+                        <h3>توزيع التكليفات والمهام <small>الحالة</small></h3>
+                        <div class="chart-box-display">
+                            <canvas id="canvas-task-distribution"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view-section" id="sec-deputies">
+                <div class="table-section">
+                    <div class="table-title-area">
+                        <h3>قائمة نواب مجلس الشعب</h3>
+                        <div class="table-filters">
+                            <input type="text" class="input-search" id="deputies-search-input" onkeyup="sys.searchDeputies()" placeholder="البحث عن نائب...">
+                            <button class="btn-action-gold" onclick="sys.openNewDeputyModal()" id="btn-admin-add-dep" style="display:none;">
+                                <i class="fas fa-user-plus"></i> إضافة نائب جديد
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>اسم النائب</th>
+                                    <th>المهام</th>
+                                    <th>الحضور</th>
+                                    <th>التقييم</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deputies-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view-section" id="sec-tasks">
+                <div class="table-section">
+                    <div class="table-title-area">
+                        <h3>سجل المهام والتكليفات المركزية</h3>
+                        <button class="btn-action-gold" onclick="sys.openNewTaskModal()" id="btn-admin-add-task" style="display:none;">
+                            <i class="fas fa-plus"></i> إضافة تكليف
+                        </button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>التكليف / المهمة</th>
+                                    <th>النائب المسؤول</th>
+                                    <th>تاريخ التكليف</th>
+                                    <th>الأولوية</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasks-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view-section" id="sec-admin">
+                <div class="table-section">
+                    <div class="table-title-area">
+                        <h3>التحكم بالإدارة والتقييم المركزي</h3>
+                        <p style="font-size:0.9rem; color:var(--color-text-muted);">تحرير الدرجات والمهام لحظياً للنواب</p>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>اسم النائب</th>
+                                    <th>تعديل المهام</th>
+                                    <th>تعديل الحضور</th>
+                                    <th>تحديث الدرجة</th>
+                                    <th>حفظ التعديل</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="app-modal" id="modal-deputy">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-deputy-title">إضافة نائب جديد للمنظومة</h3>
+                <button class="btn-close-modal" onclick="sys.closeModal('modal-deputy')">&times;</button>
+            </div>
+            <div class="modal-body-form">
+                <div class="form-group full-width-field">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="m-dep-name" class="input-search">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="text" id="m-dep-pass" class="input-search">
+                </div>
+                <div class="form-group">
+                    <label>المهام الكلية</label>
+                    <input type="number" id="m-dep-tasks" class="input-search">
+                </div>
+                <div class="form-group">
+                    <label>الحضور (%)</label>
+                    <input type="number" id="m-dep-att" class="input-search" max="100">
+                </div>
+                <div class="form-group">
+                    <label>درجة التقييم (%)</label>
+                    <input type="number" id="m-dep-score" class="input-search" max="100">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-action-gold" style="background:#E5E7EB; color:#111;" onclick="sys.closeModal('modal-deputy')">إلغاء</button>
+                <button class="btn-action-gold" onclick="sys.saveDeputy()">حفظ البيانات</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="modal-task">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>تسجيل تكليف جديد</h3>
+                <button class="btn-close-modal" onclick="sys.closeModal('modal-task')">&times;</button>
+            </div>
+            <div class="modal-body-form">
+                <div class="form-group full-width-field">
+                    <label>اسم التكليف / النشاط</label>
+                    <input type="text" id="m-task-title" class="input-search">
+                </div>
+                <div class="form-group full-width-field">
+                    <label>النائب المسؤول</label>
+                    <select id="m-task-deputy" class="input-search" style="height:44px;"></select>
+                </div>
+                <div class="form-group">
+                    <label>الأولوية</label>
+                    <select id="m-task-priority" class="input-search" style="height:44px;">
+                        <option value="عالية">عالية</option>
+                        <option value="متوسطة">متوسطة</option>
+                        <option value="عادية">عادية</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الحالة</label>
+                    <select id="m-task-status" class="input-search" style="height:44px;">
+                        <option value="مكتمل">مكتمل</option>
+                        <option value="قيد التنفيذ">قيد التنفيذ</option>
+                        <option value="متأخر">متأخر</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-action-gold" style="background:#E5E7EB; color:#111;" onclick="sys.closeModal('modal-task')">إلغاء</button>
+                <button class="btn-action-gold" onclick="sys.saveTask()">تأكيد التكليف</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pdf-report-container" class="pdf-print-container">
+        <div style="border:4px double #D4AF37; padding:30px; border-radius:12px; background:#FFFFFF;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #C41E3A; padding-bottom:15px; margin-bottom:20px;">
+                <div style="text-align:right;">
+                    <h1 style="color:#111111; font-weight:900; font-size:20px; margin-bottom:4px;">المكتب الإعلامي المركزي</h1>
+                    <h3 style="color:#C41E3A; font-weight:700; font-size:15px;">منظومة تقييم ومتابعة أداء النواب</h3>
+                </div>
+                <div style="text-align:left;">
+                    <span style="font-weight:700; font-size:13px; color:#6B7280;">تاريخ التقرير</span><br>
+                    <strong style="color:#111111; font-size:14px;" id="pdf-date">2026-05-01</strong>
+                </div>
+            </div>
+
+            <div style="margin-bottom:25px;">
+                <h2 style="font-size:18px; color:#111111; font-weight:900; margin-bottom:15px;">تقرير تقييم النائب الرسمي</h2>
+                <p style="font-size:14px; color:#374151; line-height:1.6;" id="pdf-intro-text"></p>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:15px; margin-bottom:30px;">
+                <div style="background:#F9FAFB; border:1px solid #E5E7EB; padding:15px; border-radius:8px; text-align:center;">
+                    <h4 style="font-size:12px; color:#6B7280; margin-bottom:6px;">المهام الكلية المنجزة</h4>
+                    <strong style="font-size:24px; color:#111111;" id="pdf-tasks">0</strong>
+                </div>
+                <div style="background:#F9FAFB; border:1px solid #E5E7EB; padding:15px; border-radius:8px; text-align:center;">
+                    <h4 style="font-size:12px; color:#6B7280; margin-bottom:6px;">نسبة الحضور</h4>
+                    <strong style="font-size:24px; color:#111111;" id="pdf-attendance">0%</strong>
+                </div>
+                <div style="background:#F9FAFB; border:1px solid #E5E7EB; padding:15px; border-radius:8px; text-align:center; border-bottom:3px solid #D4AF37;">
+                    <h4 style="font-size:12px; color:#6B7280; margin-bottom:6px;">التقييم النهائي العام</h4>
+                    <strong style="font-size:24px; color:#C41E3A;" id="pdf-score">0%</strong>
+                </div>
+            </div>
+
+            <div style="margin-bottom:25px;">
+                <h3 style="font-size:14px; color:#111111; font-weight:700; margin-bottom:10px; border-bottom:1px solid #E5E7EB; padding-bottom:6px;">ملاحظات الأداء العام</h3>
+                <p style="font-size:13px; color:#4B5563; line-height:1.6;" id="pdf-notes">
+                    أظهر النائب التزاماً متميزاً بالمهام والأنشطة البرلمانية الممنوحة له، وتفانياً في خدمة الدائرة الانتخابية.
+                    هذا التقرير معتمد رسمياً من قِبل إدارة التقييم والمتابعة بالمكتب الإعلامي المركزي.
+                </p>
+            </div>
+
+            <div style="margin-top:50px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="text-align:center;">
+                    <p style="font-size:13px; color:#6B7280;">توقيع مسؤول المنظومة</p>
+                    <div style="margin-top:10px; height:40px; font-weight:900; color:#111111;">معتمد برمجياً</div>
+                </div>
+                <div style="text-align:center;">
+                    <p style="font-size:13px; color:#6B7280;">ختم المكتب الإعلامي</p>
+                    <div style="margin-top:10px; font-size:14px; color:#D4AF37; font-weight:bold;">المركز الإعلامي الرسمي</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        /* قاعدة البيانات الأولية الوهمية للنواب والتكليفات */
+        const initialDeputies = [
+            { id: "D101", name: "النائب محمود عبد العزيز", pass: "dep101", tasks: 48, attendance: 98, score: 96, level: "متميز جداً", color: "high" },
+            { id: "D102", name: "النائبة سمية الشاذلي", pass: "dep102", tasks: 42, attendance: 91, score: 89, level: "متميز", color: "high" },
+            { id: "D103", name: "النائب طارق سليمان", pass: "dep103", tasks: 31, attendance: 85, score: 78, level: "جيد جداً", color: "mid" },
+            { id: "D104", name: "النائب حازم الشريف", pass: "dep104", tasks: 22, attendance: 68, score: 65, level: "مقبول", color: "alert" },
+            { id: "D105", name: "النائبة عايدة المنصوري", pass: "dep105", tasks: 39, attendance: 100, score: 93, level: "متميز جداً", color: "high" }
+        ];
+
+        const initialTasks = [
+            { id: "T901", title: "مراجعة ميزانية الإسكان الاجتماعي", deputy: "النائب محمود عبد العزيز", date: "2026-04-12", priority: "عالية", status: "مكتمل" },
+            { id: "T902", title: "دراسة تعديلات قانون الاستثمار الجديد", deputy: "النائب طارق سليمان", date: "2026-04-18", priority: "عالية", status: "قيد التنفيذ" },
+            { id: "T903", title: "تنظيم زيارة تفقدية للمستشفى العام", deputy: "النائبة سمية الشاذلي", date: "2026-04-24", priority: "متوسطة", status: "مكتمل" },
+            { id: "T904", title: "بحث طلبات شكاوى مواطني الدائرة الخامسة", deputy: "النائب حازم الشريف", date: "2026-04-30", priority: "عادية", status: "متأخر" }
+        ];
+
+        // الأدمنز المخفيون عن صفحة الدخول تماماً
+        const secretAdmins = {
+            "admin_central": "gold2026",
+            "media_director": "black2026",
+            "head_office": "red2026"
+        };
+
+        const sys = {
+            deputies: [],
+            tasks: [],
+            activeUser: null,
+            activeRole: 'deputy',
+            mainChart: null,
+            doughnutChart: null,
+
+            init: function() {
+                // استرجاع البيانات المخزنة محلياً أو تعيين البيانات الأولية
+                if (localStorage.getItem('sys_deputies')) {
+                    this.deputies = JSON.parse(localStorage.getItem('sys_deputies'));
+                } else {
+                    this.deputies = [...initialDeputies];
+                    this.saveDataToStorage();
+                }
+
+                if (localStorage.getItem('sys_tasks')) {
+                    this.tasks = JSON.parse(localStorage.getItem('sys_tasks'));
+                } else {
+                    this.tasks = [...initialTasks];
+                    this.saveTasksToStorage();
+                }
+            },
+
+            saveDataToStorage: function() {
+                localStorage.setItem('sys_deputies', JSON.stringify(this.deputies));
+            },
+
+            saveTasksToStorage: function() {
+                localStorage.setItem('sys_tasks', JSON.stringify(this.tasks));
+            },
+
+            handleAuthentication: function() {
+                const userVal = document.getElementById('auth-user').value.trim();
+                const passVal = document.getElementById('auth-pass').value.trim();
+                const errorDiv = document.getElementById('login-error-msg');
+
+                errorDiv.style.display = "none";
+
+                // 1. فحص الآدمن السري
+                if (secretAdmins[userVal] && secretAdmins[userVal] === passVal) {
+                    this.activeUser = { name: "مدير المنظومة", role: "admin", id: "A100" };
+                    this.activeRole = 'admin';
+                    this.launchSystem();
+                    return;
+                }
+
+                // 2. فحص النواب
+                const foundDeputy = this.deputies.find(d => d.name === userVal || d.id === userVal);
+                if (foundDeputy && foundDeputy.pass === passVal) {
+                    this.activeUser = { ...foundDeputy, role: "deputy" };
+                    this.activeRole = 'deputy';
+                    this.launchSystem();
+                } else {
+                    errorDiv.style.display = "block";
+                }
+            },
+
+            launchSystem: function() {
+                document.getElementById('auth-container').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('auth-container').style.display = 'none';
+                    document.getElementById('dashboard-container').style.display = 'flex';
+                    this.buildUserUI();
+                }, 400);
+            },
+
+            buildUserUI: function() {
+                document.getElementById('sys-fullname').innerText = this.activeUser.name;
+                document.getElementById('sys-avatar').innerText = this.activeUser.name.charAt(0);
+                document.getElementById('panel-welcome').innerText = `أهلاً بك، ${this.activeUser.name}`;
+
+                if (this.activeRole === 'admin') {
+                    document.getElementById('sys-role').innerText = "مسؤول المنظومة المركزية";
+                    document.getElementById('nav-admin').style.display = 'flex';
+                    document.getElementById('btn-admin-add-dep').style.display = 'inline-flex';
+                    document.getElementById('btn-admin-add-task').style.display = 'inline-flex';
+                    this.renderAllData();
+                } else {
+                    document.getElementById('sys-role').innerText = "عضو مجلس الشعب";
+                    document.getElementById('nav-admin').style.display = 'none';
+                    document.getElementById('btn-admin-add-dep').style.display = 'none';
+                    document.getElementById('btn-admin-add-task').style.display = 'none';
+                    this.renderDeputyViewOnly();
+                }
+            },
+
+            renderAllData: function() {
+                // حساب إحصائيات الأدمن
+                let totalScore = 0;
+                this.deputies.forEach(d => totalScore += d.score);
+                const avgScore = (totalScore / this.deputies.length).toFixed(1);
+                document.getElementById('kpi-avg-score').innerText = avgScore + "%";
+
+                let completedTasks = this.tasks.filter(t => t.status === 'مكتمل').length;
+                document.getElementById('kpi-tasks-done').innerText = completedTasks;
+
+                let sumAttendance = 0;
+                this.deputies.forEach(d => sumAttendance += d.attendance);
+                const avgAttendance = (sumAttendance / this.deputies.length).toFixed(1);
+                document.getElementById('kpi-attendance').innerText = avgAttendance + "%";
+
+                // العثور على أفضل نائب
+                let bestDep = this.deputies[0];
+                this.deputies.forEach(d => { if (d.score > bestDep.score) bestDep = d; });
+                document.getElementById('kpi-best-deputy').innerText = bestDep.name;
+
+                // ملء جداول الأدمن
+                this.populateDeputiesTable(this.deputies);
+                this.populateTasksTable(this.tasks);
+                this.populateAdminSettingsTable();
+                this.createCharts(this.deputies);
+            },
+
+            renderDeputyViewOnly: function() {
+                const myUser = this.deputies.find(d => d.id === this.activeUser.id);
+                document.getElementById('kpi-avg-score').innerText = myUser.score + "%";
+                document.getElementById('kpi-tasks-done').innerText = myUser.tasks;
+                document.getElementById('kpi-attendance').innerText = myUser.attendance + "%";
+                document.getElementById('kpi-best-deputy').innerText = myUser.level;
+
+                // النائب يرى نفسه فقط بالجدول
+                this.populateDeputiesTable([myUser]);
+
+                // يرى مهامه فقط
+                const myTasks = this.tasks.filter(t => t.deputy === myUser.name);
+                this.populateTasksTable(myTasks);
+
+                this.createCharts([myUser]);
+            },
+
+            populateDeputiesTable: function(dataArray) {
+                const body = document.getElementById('deputies-table-body');
+                body.innerHTML = '';
+
+                dataArray.forEach(item => {
+                    body.innerHTML += `
+                        <tr>
+                            <td>
+                                <div class="td-name">
+                                    <div class="avatar">${item.name.charAt(0)}</div>
+                                    <strong>${item.name}</strong>
+                                </div>
+                            </td>
+                            <td>${item.tasks}</td>
+                            <td>${item.attendance}%</td>
+                            <td style="font-weight:900; color:var(--color-gold-hover);">${item.score}%</td>
+                            <td><span class="pill-badge ${item.color}">${item.level}</span></td>
+                            <td>
+                                <button class="btn-table" onclick="sys.generatePrintablePDF('${item.id}')">
+                                    <i class="fas fa-file-pdf"></i> تصدير PDF
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            },
+
+            populateTasksTable: function(taskArray) {
+                const body = document.getElementById('tasks-table-body');
+                body.innerHTML = '';
+
+                taskArray.forEach(t => {
+                    let pColor = "color-gold";
+                    if (t.priority === 'عالية') pColor = "var(--color-red)";
+                    
+                    body.innerHTML += `
+                        <tr>
+                            <td><strong>${t.title}</strong></td>
+                            <td>${t.deputy}</td>
+                            <td>${t.date}</td>
+                            <td style="color:${pColor}; font-weight:700;"><i class="fas fa-flag"></i> ${t.priority}</td>
+                            <td>
+                                <span class="pill-badge ${t.status === 'مكتمل' ? 'high' : t.status === 'متأخر' ? 'alert' : 'mid'}">${t.status}</span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            },
+
+            populateAdminSettingsTable: function() {
+                const body = document.getElementById('admin-table-body');
+                body.innerHTML = '';
+
+                this.deputies.forEach(dep => {
+                    body.innerHTML += `
+                        <tr>
+                            <td><strong>${dep.name}</strong></td>
+                            <td><input type="number" id="ad-tasks-${dep.id}" value="${dep.tasks}" class="input-search" style="width:90px; padding:6px 10px;"></td>
+                            <td><input type="number" id="ad-att-${dep.id}" value="${dep.attendance}" class="input-search" style="width:90px; padding:6px 10px;"></td>
+                            <td><input type="number" id="ad-score-${dep.id}" value="${dep.score}" class="input-search" style="width:90px; padding:6px 10px;"></td>
+                            <td>
+                                <button class="btn-action-gold" onclick="sys.updateDeputyInline('${dep.id}')" style="padding:6px 15px;">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            },
+
+            updateDeputyInline: function(depId) {
+                const uTasks = parseInt(document.getElementById(`ad-tasks-${depId}`).value);
+                const uAtt = parseInt(document.getElementById(`ad-att-${depId}`).value);
+                const uScore = parseInt(document.getElementById(`ad-score-${depId}`).value);
+
+                const idx = this.deputies.findIndex(d => d.id === depId);
+                if (idx !== -1) {
+                    this.deputies[idx].tasks = uTasks;
+                    this.deputies[idx].attendance = uAtt;
+                    this.deputies[idx].score = uScore;
+                    
+                    // تقييم وتصنيف تلقائي جديد
+                    if (uScore >= 90) { this.deputies[idx].level = "متميز جداً"; this.deputies[idx].color = "high"; }
+                    else if (uScore >= 75) { this.deputies[idx].level = "متميز"; this.deputies[idx].color = "high"; }
+                    else if (uScore >= 60) { this.deputies[idx].level = "جيد جداً"; this.deputies[idx].color = "mid"; }
+                    else { this.deputies[idx].level = "مقبول"; this.deputies[idx].color = "alert"; }
+
+                    this.saveDataToStorage();
+                    this.renderAllData();
+                    alert("تم تحديث البيانات التقييمية بنجاح");
+                }
+            },
+
+            searchDeputies: function() {
+                const q = document.getElementById('deputies-search-input').value.toLowerCase();
+                const filtered = this.deputies.filter(d => d.name.toLowerCase().includes(q));
+                this.populateDeputiesTable(filtered);
+            },
+
+            switchSection: function(target) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
+
+                if (target === 'dash') {
+                    document.getElementById('sec-dash').classList.add('active');
+                    document.getElementById('nav-dash').classList.add('active');
+                } else if (target === 'deputies') {
+                    document.getElementById('sec-deputies').classList.add('active');
+                    document.getElementById('nav-deputies').classList.add('active');
+                } else if (target === 'tasks') {
+                    document.getElementById('sec-tasks').classList.add('active');
+                    document.getElementById('nav-tasks').classList.add('active');
+                } else if (target === 'admin') {
+                    document.getElementById('sec-admin').classList.add('active');
+                    document.getElementById('nav-admin').classList.add('active');
+                }
+            },
+
+            createCharts: function(deputiesSubset) {
+                // رسم بياني 1
+                if (this.mainChart) this.mainChart.destroy();
+                const labels = deputiesSubset.map(d => d.name.split(' ')[1] || d.name);
+                const scores = deputiesSubset.map(d => d.score);
+                const attendances = deputiesSubset.map(d => d.attendance);
+
+                const ctx1 = document.getElementById('canvas-main-perf').getContext('2d');
+                this.mainChart = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: 'نسبة التقييم العام (%)', data: scores, backgroundColor: '#D4AF37', borderColor: '#AA8B2C', borderWidth: 1 },
+                            { label: 'الحضور الميداني (%)', data: attendances, backgroundColor: '#111111', borderColor: '#000000', borderWidth: 1 }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                });
+
+                // رسم بياني 2
+                if (this.doughnutChart) this.doughnutChart.destroy();
+                const completed = this.tasks.filter(t => t.status === 'مكتمل').length;
+                const inProgress = this.tasks.filter(t => t.status === 'قيد التنفيذ').length;
+                const delayed = this.tasks.filter(t => t.status === 'متأخر').length;
+
+                const ctx2 = document.getElementById('canvas-task-distribution').getContext('2d');
+                this.doughnutChart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['مكتمل', 'قيد التنفيذ', 'متأخر'],
+                        datasets: [{ data: [completed, inProgress, delayed], backgroundColor: ['#D4AF37', '#1A1A1A', '#C41E3A'] }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                });
+            },
+
+            openNewDeputyModal: function() {
+                document.getElementById('modal-deputy').classList.add('active');
+            },
+
+            openNewTaskModal: function() {
+                const select = document.getElementById('m-task-deputy');
+                select.innerHTML = '';
+                this.deputies.forEach(dep => {
+                    select.innerHTML += `<option value="${dep.name}">${dep.name}</option>`;
+                });
+                document.getElementById('modal-task').classList.add('active');
+            },
+
+            closeModal: function(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            },
+
+            saveDeputy: function() {
+                const name = document.getElementById('m-dep-name').value;
+                const pass = document.getElementById('m-dep-pass').value;
+                const t = parseInt(document.getElementById('m-dep-tasks').value);
+                const att = parseInt(document.getElementById('m-dep-att').value);
+                const sc = parseInt(document.getElementById('m-dep-score').value);
+
+                if (!name || !pass) { alert("يرجى ملء جميع الحقول المطلوبة!"); return; }
+
+                const nextId = "D" + (100 + this.deputies.length + 1);
+                this.deputies.push({
+                    id: nextId, name, pass, tasks: t, attendance: att, score: sc, level: "متميز", color: "high"
+                });
+
+                this.saveDataToStorage();
+                this.renderAllData();
+                this.closeModal('modal-deputy');
+            },
+
+            saveTask: function() {
+                const title = document.getElementById('m-task-title').value;
+                const deputy = document.getElementById('m-task-deputy').value;
+                const priority = document.getElementById('m-task-priority').value;
+                const status = document.getElementById('m-task-status').value;
+
+                if (!title) { alert("يرجى إدخال عنوان التكليف!"); return; }
+
+                const nId = "T" + (900 + this.tasks.length + 1);
+                this.tasks.unshift({ id: nId, title, deputy, date: new Date().toISOString().slice(0,10), priority, status });
+
+                this.saveTasksToStorage();
+                this.renderAllData();
+                this.closeModal('modal-task');
+            },
+
+            generatePrintablePDF: function(depId) {
+                const deputy = this.deputies.find(d => d.id === depId);
+                if (!deputy) return;
+
+                // إعداد الحقول داخل نموذج الـ PDF المخفي
+                document.getElementById('pdf-date').innerText = new Date().toLocaleDateString('ar-EG');
+                document.getElementById('pdf-intro-text').innerHTML = `
+                    يُفيد المكتب الإعلامي المركزي بأن النائب المحترم <strong>${deputy.name}</strong> 
+                    قد خضع للمتابعة الدورية الشاملة حول أدائه للمهام البرلمانية ونشاط اللجان الميدانية.
+                `;
+                document.getElementById('pdf-tasks').innerText = deputy.tasks;
+                document.getElementById('pdf-attendance').innerText = deputy.attendance + "%";
+                document.getElementById('pdf-score').innerText = deputy.score + "%";
+
+                // إظهار التقرير مؤقتاً للطباعة
+                const element = document.getElementById('pdf-report-container');
+                element.classList.add('active-pdf');
+
+                const opt = {
+                    margin: 10,
+                    filename: `تقرير_${deputy.name.replace(/\s+/g, '_')}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opt).from(element).save().then(() => {
+                    element.classList.remove('active-pdf');
+                });
+            }
+        };
+
+        window.onload = () => sys.init();
+    </script>
+</body>
+</html>
