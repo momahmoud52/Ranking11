@@ -916,7 +916,7 @@
             <header class="app-header">
                 <div class="header-title">
                     <h3 id="panel-welcome">أهلاً بك في منصة التقييم</h3>
-                    <p>الإحصائيات الميدانية والمهام البرلمانية</p>
+                    <p>الإحصائيات الشاملة والمهام الخاصة باللجنة</p>
                 </div>
                 <div class="header-actions">
                     <div class="identity-badge">
@@ -937,7 +937,7 @@
                             <div class="icon-circle"><i class="fas fa-star"></i></div>
                         </div>
                         <div class="val" id="kpi-avg-score">0%</div>
-                        <p>بناءً على المهام والحضور الميداني</p>
+                        <p>بناءً على المهام والحضور للاجتماعات</p>
                     </div>
                     <div class="metric-card alert-card">
                         <div class="card-header-metric">
@@ -1174,8 +1174,8 @@
             <div style="margin-bottom:25px;">
                 <h3 style="font-size:14px; color:#111111; font-weight:700; margin-bottom:10px; border-bottom:1px solid #E5E7EB; padding-bottom:6px;">ملاحظات الأداء العام</h3>
                 <p style="font-size:13px; color:#4B5563; line-height:1.6;" id="pdf-notes">
-                    أظهر النائب التزاماً متميزاً بالمهام والأنشطة البرلمانية الممنوحة له، وتفانياً في خدمة الدائرة الانتخابية.
-                    هذا التقرير معتمد رسمياً من قِبل إدارة التقييم والمتابعة بالمكتب الإعلامي المركزي.
+                    أظهر النائب التزاماً متميزاً بالمهام والأنشطة الممنوحة له، وتفانياً في خدمة المجموعة.
+                    هذا التقرير  معتمد رسمياً من قِبل إدارة التقييم والمتابعة بالمكتب الإعلامي المركزي.
                 </p>
             </div>
 
@@ -1196,18 +1196,14 @@
     <script>
         /* قاعدة البيانات الأولية الوهمية للنواب والتكليفات */
         const initialDeputies = [
-            { id: "D101", name: "النائب محمود عبد العزيز", pass: "dep101", tasks: 48, attendance: 98, score: 96, level: "متميز جداً", color: "high" },
-            { id: "D102", name: "النائبة سمية الشاذلي", pass: "dep102", tasks: 42, attendance: 91, score: 89, level: "متميز", color: "high" },
-            { id: "D103", name: "النائب طارق سليمان", pass: "dep103", tasks: 31, attendance: 85, score: 78, level: "جيد جداً", color: "mid" },
-            { id: "D104", name: "النائب حازم الشريف", pass: "dep104", tasks: 22, attendance: 68, score: 65, level: "مقبول", color: "alert" },
-            { id: "D105", name: "النائبة عايدة المنصوري", pass: "dep105", tasks: 39, attendance: 100, score: 93, level: "متميز جداً", color: "high" }
+            { id: "D101", name: "النائبة بسنت القاضي", pass: "dep101", tasks: 48, attendance: 98, score: 96, level: "متميز جداً", color: "high" },
+            { id: "D102", name: "النائب عبدالرحمن محسن", pass: "dep102", tasks: 31, attendance: 85, score: 78, level: "جيد جداً", color: "mid" },
+            { id: "D103", name: "النائب كريم زيدان", pass: "dep103", tasks: 22, attendance: 68, score: 65, level: "مقبول", color: "alert" },
         ];
 
         const initialTasks = [
-            { id: "T901", title: "مراجعة ميزانية الإسكان الاجتماعي", deputy: "النائب محمود عبد العزيز", date: "2026-04-12", priority: "عالية", status: "مكتمل" },
-            { id: "T902", title: "دراسة تعديلات قانون الاستثمار الجديد", deputy: "النائب طارق سليمان", date: "2026-04-18", priority: "عالية", status: "قيد التنفيذ" },
-            { id: "T903", title: "تنظيم زيارة تفقدية للمستشفى العام", deputy: "النائبة سمية الشاذلي", date: "2026-04-24", priority: "متوسطة", status: "مكتمل" },
-            { id: "T904", title: "بحث طلبات شكاوى مواطني الدائرة الخامسة", deputy: "النائب حازم الشريف", date: "2026-04-30", priority: "عادية", status: "متأخر" }
+            { id: "T901", title: "مراجعة اللجان ومتابعة  المهام", deputy: "النائبة بسنت القتضي ", date: "2026-06-01", priority: "عالية", status: "قيد التتنفيذ" },
+            { id: "T902", title: "مساعدة اللجان الاخري في الاعمال المتعلقة بالتصميم", deputy: "النائب عبدالرحمن محسن", date: "2026-05-15", priority: "عالية", status: "قيد التنفيذ" },
         ];
 
         // الأدمنز المخفيون عن صفحة الدخول تماماً
@@ -1481,7 +1477,7 @@
                         labels: labels,
                         datasets: [
                             { label: 'نسبة التقييم العام (%)', data: scores, backgroundColor: '#D4AF37', borderColor: '#AA8B2C', borderWidth: 1 },
-                            { label: 'الحضور الميداني (%)', data: attendances, backgroundColor: '#111111', borderColor: '#000000', borderWidth: 1 }
+                            { label: 'الحضور للاجتماعات (%)', data: attendances, backgroundColor: '#111111', borderColor: '#000000', borderWidth: 1 }
                         ]
                     },
                     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
@@ -1564,7 +1560,7 @@
                 document.getElementById('pdf-date').innerText = new Date().toLocaleDateString('ar-EG');
                 document.getElementById('pdf-intro-text').innerHTML = `
                     يُفيد المكتب الإعلامي المركزي بأن النائب المحترم <strong>${deputy.name}</strong> 
-                    قد خضع للمتابعة الدورية الشاملة حول أدائه للمهام البرلمانية ونشاط اللجان الميدانية.
+                    قد خضع للمتابعة الدورية الشاملة حول أدائه للمهام الخاصة باللجنة ونشاط اللجان بالمحافظات.
                 `;
                 document.getElementById('pdf-tasks').innerText = deputy.tasks;
                 document.getElementById('pdf-attendance').innerText = deputy.attendance + "%";
